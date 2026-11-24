@@ -1,0 +1,56 @@
+body {
+  background-color: #f4f6f9;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.app-title {
+  color: #2b4c7e;
+  letter-spacing: -0.5px;
+}
+/* All Three Cards Utilize This Class Styling */
+.custom-card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px #0000000f;
+  overflow: hidden;
+}
+/**************************************************
+******************Add Task Card *******************/
+.custom-card-header {
+  background-color: #2b4c7e;
+  color: #ffffff;
+  border: none;
+}
+
+.btn-custom {
+  background-color: #2b4c7e;
+  color: #ffffff;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-custom:hover {
+  background-color: #1f385e;
+  color: #ffffff;
+}
+
+.btn-custom:active {
+  transform: scale(0.98);
+}
+/*****************************************************
+*****************Display Task Table******************/
+.custom-table-head th {
+  background-color: #2b4c7e;
+  color: #ffffff;
+  border: none;
+}
+
+.task-completed .task-title {
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
+.task-overdue {
+  border-left: 4px solid #dc3545;
+  background-color: #fff8f8;
+}

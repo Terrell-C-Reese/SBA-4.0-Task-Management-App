@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Management App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous" defer></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <div class="container py-5">
+    <header class="text-center mb-4">
+      <h1 class="fw-bold app-title">Task Management App</h1>
+      <p class="text-muted">Organize deadlines, track progress, and filter your workflow</p>
+    </header>
+<!------------------Add Card--------------------------------->
+    <div class="card custom-card mb-4">
+      <div class="card-header custom-card-header fw-semibold">
+        Add New Task
+      </div>
+        <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label for="taskName" class="form-label">Task Name</label>
+            <input type="text" id="taskName" class="form-control" placeholder="e.g., Build JavaScript project" required>
+          </div>
+          <div class="col-md-2">
+            <label for="taskCategory" class="form-label">Category</label>
+            <select id="taskCategory" class="form-select">
+              <option value="Work">Work</option>
+              <option value="Personal">Personal</option>
+              <option value="School">School</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="taskDeadline" class="form-label">Deadline</label>
+            <input type="date" id="taskDeadline" class="form-control" required>
+          </div>
+          <div class="col-md-2">
+            <label for="taskStatus" class="form-label">Status</label>
+            <select id="taskStatus" class="form-select">
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+          <div class="col-md-2 d-flex align-items-end">
+            <button id="addTaskBtn" class="btn btn-custom w-100">Add Task</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-----------------Filter Card------------------------------>
+    <div class="card custom-card mb-4">
+      <div class="card-body">
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <label for="filterStatus" class="form-label fw-semibold">Filter by Status</label>
+            <select id="filterStatus" class="form-select">
+              <option value="All">All Statuses</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+              <option value="Overdue">Overdue</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="filterCategory" class="form-label fw-semibold">Filter by Category</label>
+            <select id="filterCategory" class="form-select">
+              <option value="All">All Categories</option>
+              <option value="Work">Work</option>
+              <option value="Personal">Personal</option>
+              <option value="School">School</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-------------Table Display for Task List-------------->
+    <div class="card custom-card">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="custom-table-head">
+              <tr>
+                <th>Task Name</th>
+                <th>Category</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th>Update Status</th>
+              </tr>
+            </thead>
+            <tbody id="taskListBody">          
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    </body>
+</html>
