@@ -84,3 +84,101 @@ function updateTaskStatus(taskId, newStatus) {
   saveTasks();
   renderTasks();
 }
+function getStatusBadge(status) {
+  if (status === "Completed") {
+    return "bg-success";
+  } else if (status === "Overdue") {
+    return "bg-danger";
+  } else {
+    return "bg-warning text-dark";
+  }
+}
+function renderTasks() {
+  taskListBody.innerHTML = "";
+
+  const selectedStatus = filterStatusSelect.value;
+  const selectedCategory = filterCategorySelect.value;
+
+  const filteredTasks = tasks.filter(function (task) {
+    let matchesStatus = false;
+    if (selectedStatus === "All" || task.status === selectedStatus) {
+      matchesStatus = true;
+    }
+
+    let matchesCategory = false;
+    if (selectedCategory === "All" || task.category === selectedCategory) {
+      matchesCategory = true;
+    }
+
+    return matchesStatus && matchesCategory;
+  });
+
+  if (filteredTasks.length === 0) {
+    taskListBody.innerHTML = `
+      <tr>
+        <td colspan="5" class="text-center text-muted py-4">No tasks found.</td>
+      </tr>
+    `;
+    return;
+  }
+
+  for (const task of filteredTasks) {
+    const row = document.createElement("tr");
+    if (task.status === "Completed") {
+      row.classList.add("task-completed");
+    }
+    if (task.status === "Overdue") {
+      row.classList.add("task-overdue");
+    }
+
+    const nameCell = document.createElement("td");
+    nameCell.className = "fw-medium task-title";
+    nameCell.textContent = task.name;
+
+    const categoryCell = document.createElement("td");
+    categoryCell.innerHTML = `<span class="badge bg-secondary">${task.category}</span>`;
+
+    const deadlineCell = document.createElement("td");
+    deadlineCell.textContent = task.deadline;
+
+    const statusCell = document.createElement("td");
+    const badgeClass = getStatusBadge(task.status);
+    statusCell.innerHTML = `<span class="badge ${badgeClass}">${task.status}</span>`;
+
+    const actionCell = document.createElement("td");
+    const statusSelect = document.createElement("select");
+    statusSelect.className = "form-select form-select-sm w-auto";
+
+    const options = ["In Progress", "Completed", "Overdue"];
+    for (let i = 0; i < options.length; i++) {
+      const option = document.createElement("option");
+      option.value = options[i];
+      option.textContent = options[i];
+      if (task.status === options[i]) {
+        option.selected = true;
+      }
+      statusSelect.appendChild(option);
+    }
+
+    statusSelect.addEventListener("change", function () {
+      updateTaskStatus(task.id, statusSelect.value);
+    });
+
+    actionCell.appendChild(statusSelect);
+
+    row.appendChild(nameCell);
+    row.appendChild(categoryCell);
+    row.appendChild(deadlineCell);
+    row.appendChild(statusCell);
+    row.appendChild(actionCell);
+
+    taskListBody.appendChild(row);
+  }
+}
+
+addTaskBtn.addEventListener("click", addTask);
+filterStatusSelect.addEventListener("change", renderTasks);
+filterCategorySelect.addEventListener("change", renderTasks);
+
+checkOverdueTasks();
+renderTasks();
